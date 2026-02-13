@@ -1,0 +1,44 @@
+local p = game.Players.LocalPlayer
+local Tween = game:GetService("TweenService")
+ 
+local gui = p.PlayerGui:WaitForChild("PhoneGUI")
+local phone = gui:WaitForChild("Phone")
+ 
+-- Botão redondo do celular
+local btn = Instance.new("ImageButton", gui)
+btn.Size = UDim2.new(0,60,0,60)
+btn.AnchorPoint = Vector2.new(1,0) -- pra alinhar pela direita
+btn.Position = UDim2.new(0.98,0,0.05,0) -- perto do botão Pare
+btn.Image = "rbxassetid://129824757084744"
+btn.BackgroundTransparency = 1
+ 
+-- Deixa redondo
+local corner = Instance.new("UICorner", btn)
+corner.CornerRadius = UDim.new(0.5,0)
+ 
+-- Som do botão
+local sound = Instance.new("Sound", btn)
+sound.SoundId = "rbxassetid://9118823101"
+sound.Volume = 1
+ 
+-- Animação abrir/fechar celular
+local open = Tween:Create(phone, TweenInfo.new(0.35), {
+Position = UDim2.new(0.7,0,0.2,0)
+})
+ 
+local close = Tween:Create(phone, TweenInfo.new(0.35), {
+Position = UDim2.new(0.7,0,1,0)
+})
+ 
+-- Clique no botão
+btn.MouseButton1Click:Connect(function()
+    sound:Play()
+    if phone.Visible then
+        close:Play()
+        task.wait(0.3)
+        phone.Visible = false
+    else
+        phone.Visible = true
+        open:Play()
+    end
+end)
