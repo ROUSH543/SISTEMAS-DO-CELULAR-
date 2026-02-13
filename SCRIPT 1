@@ -1,0 +1,45 @@
+local p = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui", p.PlayerGui)
+gui.Name = "PhoneGUI"
+
+local phone = Instance.new("Frame", gui)
+phone.Name = "Phone"
+phone.Size = UDim2.new(0,190,0,360)
+phone.Position = UDim2.new(0.7,0,1,0)
+phone.BackgroundColor3 = Color3.fromRGB(15,15,15)
+phone.BorderSizePixel = 0
+phone.Visible = false
+phone.Active = true
+phone.Draggable = true
+Instance.new("UICorner", phone).CornerRadius = UDim.new(0,28)
+
+local screen = Instance.new("Frame", phone)
+screen.Size = UDim2.new(1,-10,1,-10)
+screen.Position = UDim2.new(0,5,0,5)
+screen.BackgroundColor3 = Color3.fromRGB(0,0,0)
+screen.BorderSizePixel = 0
+Instance.new("UICorner", screen).CornerRadius = UDim.new(0,24)
+
+local hour = Instance.new("TextLabel", screen)
+hour.Name = "Hour"
+hour.Size = UDim2.new(0.3,0,0,25)
+hour.Position = UDim2.new(0.3,0,0,0)
+hour.BackgroundTransparency = 1
+hour.TextColor3 = Color3.new(1,1,1)
+hour.TextScaled = true
+hour.TextXAlignment = Enum.TextXAlignment.Right
+
+local bat = Instance.new("TextLabel", screen)
+bat.Size = UDim2.new(0.35,0,0,25)
+bat.Position = UDim2.new(0.6,0,0,0)
+bat.BackgroundTransparency = 1
+bat.TextColor3 = Color3.new(1,1,1)
+bat.Text = " 85%"
+bat.TextScaled = true
+
+task.spawn(function()
+    while true do
+        hour.Text = os.date("%H:%M")
+        task.wait(1)
+    end
+end)
